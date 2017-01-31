@@ -13,13 +13,18 @@ app.get('/hola-mundo',function(req, res){
 //enviar mensaje por defecto
 var messages =[{
     id:1,
-    text: 'Bienvenidos al chat de RCHECNES',
-    nickname: 'Bot- rchecnes.es'
+    text: 'WELCOME TO CHAT OF RCHECNES!!',
+    nickname: '200.200.200.200'
 }]
 
 //crear conexion
 io.on('connection', function(socket){
     console.log("El equipo con IP: "+socket.handshake.address+" se ha conectado..");
+
+    var ipClient = socket.handshake.address.replace('::ffff:','');
+    
+    //document.getElementById('nickname').value = ipClient;
+
     socket.emit('messages',messages);
 
     socket.on('add-message',function(data){

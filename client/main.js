@@ -1,7 +1,7 @@
 var socket=io.connect('http://192.168.0.9:6677',{'forceNew':true});
 
 socket.on('messages',function(data){
-    console.log(data);
+    //console.log(data);
     render(data);
 });
 
@@ -28,13 +28,16 @@ function render(data){
 }
 
 function addMessage(e){
+    
+    var ipClient = socket;
+    console.log(ipClient);
     var message = {
-        nickname: document.getElementById('nickname').value,
+        nickname: '4000',
         text: document.getElementById('text').value
     };
-
-    document.getElementById('nickname').style.display='none';
-    socket.emit('add-message', message);
+    //console.log(ipClient);
+    //document.getElementById('nickname').style.display='none';
+    socket.emit('add-message',message);
 
     return false;
 }

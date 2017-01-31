@@ -6,6 +6,8 @@
     <meta name="viewport" content="width-devise-width, initial-scale=1.0">
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="main.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="https://l2.io/ip.js?var=userip"></script>-->
     <!--<link href="/bootstrap.min.css" rel="stylesheet">-->
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -16,7 +18,7 @@
 
     <style type="text/css">
         #messages{
-            width: 95%;
+            /*width: 95%;*/
             /*max-width: 400px;*/
             height: 500px;
             overflow-y: scroll;
@@ -36,23 +38,29 @@
 <body>
     
     <div class="container">
-        <h1>Chat con socket.io y NodeJS</h1>
+        <div class="row text-center"><h1>I LOVE CHATING WHIT MY FRIENDS</h1></div>
         <div class="row" id="messages"></div>
         <div class="row">
             <form onsubmit="return addMessage(this)">
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="nickname" name="nickname" placeholder="Nombre">
+                <!--<div class="col-lg-10">
+                    
+                </div>-->
+                <div class="col-lg-12">
+                    <input type="hidden" class="form-control" id="nickname" name="nickname" placeholder="Nombre">
+                    <textarea id="text" placeholder="Add your message and click in button send" class="form-control"></textarea>
                 </div>
-                <div class="col-lg-10">
-                    <textarea id="text" placeholder="Mensaje..." class="form-control"></textarea>
-                </div>
-                <div class="col-lg-10">
-                    <input type="submit" value="Enviar">
+                <div class="col-lg-12"><br>
+                    <p class="text-right">
+                        <input type="submit" value="SEND TO MESSAGE" class="btn btn-success">
+                    </p>
                 </div>
                 
             </form>
         </div>
     </div>
+    <script type="text/javascript">
+      
+    </script>
     
 </body>
 </html>
