@@ -1,7 +1,7 @@
-var express = require('express');
-var app = express();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
+var express   = require('express');
+var app       = express();
+var server    = require('http').Server(app);
+var io        = require('socket.io')(server);
 
 //Cargar una vista estatica
 app.use(express.static('client'));
@@ -13,7 +13,7 @@ app.get('/hola-mundo',function(req, res){
 //enviar mensaje por defecto
 var messages =[{
     id:1,
-    text: 'WELCOME TO CHAT OF RCHECNES!!',
+    text: 'WELCOME TO CHAT OF RCHECNES 777!!',
     nickname: '200.200.200.200'
 }]
 
@@ -28,6 +28,7 @@ io.on('connection', function(socket){
     socket.emit('messages',messages);
 
     socket.on('add-message',function(data){
+        data.nickname = ipClient;
         messages.push(data);
 
         io.sockets.emit('messages',messages);

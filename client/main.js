@@ -28,15 +28,12 @@ function render(data){
 }
 
 function addMessage(e){
-    
-    var ipClient = socket;
-    console.log(ipClient);
+
     var message = {
-        nickname: '4000',
+        //nickname: '4000',
         text: document.getElementById('text').value
     };
-    //console.log(ipClient);
-    //document.getElementById('nickname').style.display='none';
+
     socket.emit('add-message',message);
 
     return false;
