@@ -1,4 +1,4 @@
-var socket=io.connect('http://192.168.20.167:6677',{'forceNew':true});
+var socket=io.connect('http://192.168.0.9:6677',{'forceNew':true});
 
 socket.on('messages',function(data){
     //console.log(data);
@@ -33,7 +33,7 @@ function addMessage(e){
 
     text = text.replace(':)', "<span class='emoticon feliz'></span>");
     text = text.replace('::)', "<span class='emoticon triste'></span>");
-    text = text.replace('@@)', "<span class='emoticon amor'></span>")
+    text = text.replace('@@)', "<span class='emoticon amor'></span>");
 
 
 
