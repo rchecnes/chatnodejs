@@ -29,9 +29,17 @@ function render(data){
 
 function addMessage(e){
 
+    var text = document.getElementById('text').value;
+
+    text = text.replace(':)', "<span class='emoticon feliz'></span>");
+    text = text.replace('::)', "<span class='emoticon triste'></span>");
+    text = text.replace('@@)', "<span class='emoticon amor'></span>")
+
+
+
     var message = {
         //nickname: '4000',
-        text: document.getElementById('text').value
+        text: text
     };
 
     socket.emit('add-message',message);
