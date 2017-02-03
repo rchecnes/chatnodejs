@@ -36,23 +36,72 @@
         }
 
         .emoticon{
-            width: 140px;
-            height: 140px;
-            background: url(https://static.vecteezy.com/system/resources/previews/000/085/195/non_2x/vector-cute-smiley-emoticon-set.jpg) no-repeat top left;
-            margin: 10px;
+            width: 59px;
+            height: 65px;
+            background: url(https://1.bp.blogspot.com/-ReBWdfwKL14/VwpO7xz5FLI/AAAAAAAAAYA/WaDfdUDCmIQ93Z59Tm0922-FH9739tOJw/s1600/emojis.png) no-repeat top left;
+            margin: 4px;
             cursor: pointer;
-            float: left;
-            zoom: 34%;
+            display: table;
+            zoom: 58%;
         }
-        #feliz{ background-position: -38px -11px;}
-        #triste{ background-position: -38px -11px;}
-        #amor{ background-position: -38px -11px;}
+        #emot10{ background-position: -22px -21px;}
+        #emot20{ background-position: -105px -20px;}
+        #emot30{ background-position: -187px -20px;}
+        #emot40{ background-position: -271px -20px;}
+        #emot50{ background-position: -271px -20px;}
+        #emot60{ background-position: -523px -21px;}
+        #emot70{ background-position: -606px -20px;}
+        #emot80{ background-position: -688px -20px;}
+        #emot90{ background-position: -773px -20px;}
+        #emot110{ background-position: -855px -20px;}
+        #emot120{ background-position: -939px -20px;}
+        #emot130{ background-position: -22px -116px;}
+        #emot140{ background-position: -105px -116px;}
+        #emot150{ background-position: -189px -116px;}
+        #emot160{ background-position: -272px -116px;}
 
         /*Enviado*/
-        .feliz_send{ background-position: -38px -11px;}
+        .emoticon-send{
+            width: 59px;
+            height: 65px;
+            background: url(https://1.bp.blogspot.com/-ReBWdfwKL14/VwpO7xz5FLI/AAAAAAAAAYA/WaDfdUDCmIQ93Z59Tm0922-FH9739tOJw/s1600/emojis.png) no-repeat top left;
+            margin: 4px;
+            zoom: 40%;
+        }
+        
+
+        .emot10-send{ background-position: -22px -21px;}
+        .emot20-send{ background-position: -105px -20px;}
+        .emot30-send{ background-position: -187px -20px;}
+        .emot40-send{ background-position: -271px -20px;}
+        .emot50-send{ background-position: -271px -20px;}
+        .emot60-send{ background-position: -523px -21px;}
+        .emot70-send{ background-position: -606px -20px;}
+        .emot80-send{ background-position: -688px -20px;}
+        .emot90-send{ background-position: -773px -20px;}
+        .emot110-send{ background-position: -855px -20px;}
+        .emot120-send{ background-position: -939px -20px;}
+        .emot130-send{ background-position: -22px -116px;}
+        .emot140-send{ background-position: -105px -116px;}
+        .emot150-send{ background-position: -189px -116px;}
+        .emot160-send{ background-position: -272px -116px;}
 
         #cab_emoticon{
             display: none;
+            background: #ffffff;
+            border-radius: 9px;
+            border: 1px solid #c1c1c1;
+            position: absolute;
+            z-index: 1000;
+        }
+
+        #cab_emoticon ul{
+            padding: 2px;
+        }
+
+        #cab_emoticon ul li{
+            list-style: none;
+            float: left;
         }
     </style>
 </head>
@@ -75,9 +124,24 @@
                         <div class="col-lg-4">
                             <input type="button" id="viewemoticon" value="SHOW HIDE EMOTICON" class="btn btn-alert">
                             <div id="cab_emoticon">
-                                <span class="emoticon" param='feliz' id="feliz"></span>
-                                <span class="emoticon" param='triste' id="triste"></span>
-                                <span class="emoticon" param='amor' id="amor"></span>
+                                <ul>
+                                    <li><span class="emoticon" param=':)emot10' id="emot10"></span></li>
+                                    <li><span class="emoticon" param=':)emot20' id="emot20"></span></li>
+                                    <li><span class="emoticon" param=':)emot30' id="emot30"></span></li>
+                                    <li><span class="emoticon" param=':)emot40' id="emot40"></span></li>
+                                    <li><span class="emoticon" param=':)emot50' id="emot50"></span></li>
+                                    <li><span class="emoticon" param=':)emot60' id="emot60"></span></li>
+                                    <li><span class="emoticon" param=':)emot70' id="emot70"></span></li>
+                                    <li><span class="emoticon" param=':)emot80' id="emot80"></span></li>
+                                    <li><span class="emoticon" param=':)emot90' id="emot90"></span></li>
+                                    <li><span class="emoticon" param=':)emot110' id="emot110"></span></li>
+                                    <li><span class="emoticon" param=':)emot120' id="emot120"></span></li>
+                                    <li><span class="emoticon" param=':)emot130' id="emot130"></span></li>
+                                    <li><span class="emoticon" param=':)emot140' id="emot140"></span></li>
+                                    <li><span class="emoticon" param=':)emot150' id="emot150"></span></li>
+                                    <li><span class="emoticon" param=':)emot160' id="emot160"></span></li>
+                                </ul>
+                                
                             </div>
                         </div>
                     </div>
@@ -112,20 +176,8 @@
 
         $(".emoticon").click(function(){
             var param = $(this).attr('param');
-            var send = '';
-
-            switch (param) {
-              case 'feliz':
-                send = ':)';
-                break;
-              case 'triste':
-                send = '::)';
-                break;
-              case 'amor':
-                send = '@@)';
-                break;  
-            }
-            $("#text").val($("#text").val()+' '+send);
+            $("#text").val($("#text").val()+' '+param).focus();
+            $("#cab_emoticon").toggle();
         });
         
       })
