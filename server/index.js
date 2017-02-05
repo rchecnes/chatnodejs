@@ -14,7 +14,10 @@ app.get('/hola-mundo',function(req, res){
 var messages =[{
     id:1,
     text: 'WELCOME TO CHAT OF RCHECNES 777!!',
-    nickname: '200.200.200.200'
+    nickname: '200.200.200.200',
+    time: '2.40pm',
+    date:'04/02/2017',
+    raiting: 'false'
 }]
 
 //crear conexion
@@ -25,13 +28,13 @@ io.on('connection', function(socket){
     
     //document.getElementById('nickname').value = ipClient;
 
-    socket.emit('messages',messages);
+    socket.emit('messages', ipClient, messages);
 
     socket.on('add-message',function(data){
         data.nickname = ipClient;
         messages.push(data);
 
-        io.sockets.emit('messages',messages);
+        io.sockets.emit('messages', ipClient, messages);
     });
 
 
