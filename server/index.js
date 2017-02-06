@@ -31,13 +31,13 @@ io.on('connection', function(socket){
     
     //document.getElementById('nickname').value = ipClient;
 
-    socket.emit('messages', ipClient, messages);
+    socket.emit('messages', messages);
 
     socket.on('add-message',function(data){
-        data.nickname = ipClient;
+        //data.nickname = ipClient;
         messages.push(data);
 
-        io.sockets.emit('messages', ipClient, messages);
+        io.sockets.emit('messages', messages);
     });
 
 

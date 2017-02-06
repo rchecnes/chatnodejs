@@ -3,7 +3,7 @@
 <head>
     <title>Chat con socket.io y NodeJS</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width-devise-width, initial-scale=1.0">
+    <!--<meta name="viewport" content="width-devise-width, initial-scale=1.0">-->
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
@@ -115,6 +115,9 @@
             float: left;
         }
     </style>
+    <script type="text/javascript">
+        
+    </script>
 </head>
 <body>
     
@@ -141,7 +144,8 @@
             <div class="box-footer">
               <form action="#" method="post" id="chat" onsubmit="return addMessage(this)">
                 <div class="input-group">
-                  <input type="text" name="text" id="text" placeholder="Add your message and click in button send | ENTER" class="form-control">
+                    <input type="text" name="text" id="text" placeholder="Add your message and click in button send | ENTER" class="form-control">
+                    <input type="hidden" name="myip" id="myip">
                     <span class="input-group-btn">
                         <button type="button"  id="viewemoticon" class="btn btn-primary btn-flat" >EMOTICONS</button>
                     </span>
@@ -172,52 +176,6 @@
               </form>
             </div>
         </div>
-        
-        
-<!--
-        <form id="chat" onsubmit="return addMessage(this)">
-            
-            
-            <div class="row">
-                <div class="col-lg-8">
-                    <input type="hidden" class="form-control" id="nickname" name="nickname" placeholder="Nombre">
-                    <input type="text" id="text" placeholder="Add your message and click in button send | ENTER" autocomplete="off" class="form-control">
-                </div>
-                <div class="col-lg-4">
-                    <input type="button" id="viewemoticon" value="SHOW HIDE EMOTICON" class="btn btn-alert">
-                    <div id="cab_emoticon">
-                        <ul>
-                            <li><span class="emoticon" param=':)emot10' id="emot10"></span></li>
-                            <li><span class="emoticon" param=':)emot20' id="emot20"></span></li>
-                            <li><span class="emoticon" param=':)emot30' id="emot30"></span></li>
-                            <li><span class="emoticon" param=':)emot40' id="emot40"></span></li>
-                            <li><span class="emoticon" param=':)emot50' id="emot50"></span></li>
-                            <li><span class="emoticon" param=':)emot60' id="emot60"></span></li>
-                            <li><span class="emoticon" param=':)emot70' id="emot70"></span></li>
-                            <li><span class="emoticon" param=':)emot80' id="emot80"></span></li>
-                            <li><span class="emoticon" param=':)emot90' id="emot90"></span></li>
-                            <li><span class="emoticon" param=':)emot110' id="emot110"></span></li>
-                            <li><span class="emoticon" param=':)emot120' id="emot120"></span></li>
-                            <li><span class="emoticon" param=':)emot130' id="emot130"></span></li>
-                            <li><span class="emoticon" param=':)emot140' id="emot140"></span></li>
-                            <li><span class="emoticon" param=':)emot150' id="emot150"></span></li>
-                            <li><span class="emoticon" param=':)emot160' id="emot160"></span></li>
-                        </ul>
-                        
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-12"><br>
-                
-                <p class="text-right">
-                    <input type="submit" id="send" value="SEND TO MESSAGE" class="btn btn-success">
-                </p>
-                                        
-            </div>
-            
-        </form>
-        -->      
     </div>
     
     <script type="text/javascript">
@@ -242,9 +200,11 @@
             $("#text").val($("#text").val()+' '+param).focus();
             $("#cab_emoticon").toggle();
         });
-        
       })
+
+
     </script>
+    
     
 </body>
 </html>
