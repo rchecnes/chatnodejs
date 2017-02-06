@@ -15,12 +15,12 @@ var messages =[{
     id:1,
     text: 'WELCOME TO CHAT OF RCHECNES 777!!',
     nickname: '200.200.200.200',
-    time: '2.40pm',
-    date:'04/02/2017',
+    time: '2:40.00 PM',
+    date:'01/01/2030',
     raiting: 'false',
-    year: 2017,
-    month: 2,
-    day: 1
+    year: '2030',
+    month: '01',
+    day: '01'
 }]
 
 //crear conexion

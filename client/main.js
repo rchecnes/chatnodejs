@@ -1,4 +1,4 @@
-var socket=io.connect('http://192.168.20.167:6677',{'forceNew':true});
+var socket=io.connect('http://192.168.0.11:6677',{'forceNew':true});
 
 socket.on('messages',function(ipClient, data){
     //console.log(data);
@@ -6,52 +6,68 @@ socket.on('messages',function(ipClient, data){
     render(ipClient, data);
 });
 
+pad = function(value, length) {
+    return (value.toString().length < length) ? pad("0"+value, length):value;
+}
+
 getMonthText = function(month){
 
   var textMonth = '';
 
   switch(month) {
 
-    case 1:
+    case '01':
       textMonth = 'Jan';
       break;
-    case 2:
+    case '02':
       textMonth = 'Feb';
       break;
-    case 3:
+    case '03':
       textMonth = 'Mar';
       break;
-    case 4:
+    case '04':
       textMonth = 'Apr';
       break;
-    case 5:
+    case '05':
       textMonth = 'May';
       break;
-    case 6:
+    case '06':
       textMonth = 'June';
       break;
-    case 7:
+    case '07':
       textMonth = 'July';
       break;
-    case 8:
+    case '08':
       textMonth = 'Aug';
       break;
-    case 9:
+    case '09':
       textMonth = 'Sept';
       break;
-    case 10:
+    case '10':
       textMonth = 'Oct';
       break;
-    case 11:
+    case '11':
       textMonth = 'Nov';
       break;
-    case 12:
+    case '12':
       textMonth = 'Dec';
       break;
   }
 
   return textMonth;
 
+}
+
+formatAMPM = function(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  var ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours +':'+minutes+':'+seconds+' '+ampm;
+  return strTime;
 }
 
 
@@ -61,16 +77,20 @@ function render(ipClient, data){
     var direct      = 'left';
     var directdate  = 'right';
     var txtnickname = '';
+    var imguser     = '';
 
     for (var i = 0; i < data.length; i++) {
 
       if (data[i].nickname == ipClient) {
         direct     = 'right';
         directdate = 'left';
-        txtnickname = ' :Dice '+data[i].nickname;
+        //txtnickname = ' :Dice '+data[i].nickname;
+        txtnickname = 'MY MESSAGE';
+        imguser = 'user1.jpg';
       }else{
         
         txtnickname = data[i].nickname+' Dice:';
+        imguser     = 'user.jpg';
       }
 
       //Month text
@@ -82,7 +102,7 @@ function render(ipClient, data){
           html+= '<span class="direct-chat-name pull-'+direct+'">'+txtnickname+'</span>';
           html+= '<span class="direct-chat-timestamp pull-'+directdate+'">'+data[i].day+' '+monthtext+' '+data[i].year+'  '+data[i].time+'</span>';
         html+= '</div>';
-        html+= '<img class="direct-chat-img" src="img/user.jpg" alt="Message User Image">';
+        html+= '<img class="direct-chat-img" src="img/'+imguser+'" alt="Message User Image">';
         html+= '<div class="direct-chat-text">'+data[i].text+'</div>';
       html+= '</div>';
 
@@ -114,19 +134,22 @@ function addMessage(e){
   text = text.replace(":)emot150","<label class='emoticon-send emot150-send'></label>");
   text = text.replace(":)emot160","<label class='emoticon-send emot160-send'></label>");
   
+  //Date
   var date = new Date().toLocaleDateString();
-  var time = new Date().toLocaleTimeString();
+  //var time = new Date().toLocaleTimeString();
   var d = new Date();
+
+
 
   var message = {
       //nickname: '4000',
       text: text,
-      time: time,
+      time: formatAMPM(d),
       date: date,
       raiting: 'true',
       year: d.getFullYear(),
-      month: d.getMonth()+1,
-      day: d.getDate()
+      month: pad(d.getMonth()+1,2),
+      day: pad(d.getDate(),2)
   };
 
   socket.emit('add-message',message);
