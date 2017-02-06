@@ -17,7 +17,10 @@ var messages =[{
     nickname: '200.200.200.200',
     time: '2.40pm',
     date:'04/02/2017',
-    raiting: 'false'
+    raiting: 'false',
+    year: 2017,
+    month: 2,
+    day: 1
 }]
 
 //crear conexion

@@ -6,6 +6,55 @@ socket.on('messages',function(ipClient, data){
     render(ipClient, data);
 });
 
+getMonthText = function(month){
+
+  var textMonth = '';
+
+  switch(month) {
+
+    case 1:
+      textMonth = 'Jan';
+      break;
+    case 2:
+      textMonth = 'Feb';
+      break;
+    case 3:
+      textMonth = 'Mar';
+      break;
+    case 4:
+      textMonth = 'Apr';
+      break;
+    case 5:
+      textMonth = 'May';
+      break;
+    case 6:
+      textMonth = 'June';
+      break;
+    case 7:
+      textMonth = 'July';
+      break;
+    case 8:
+      textMonth = 'Aug';
+      break;
+    case 9:
+      textMonth = 'Sept';
+      break;
+    case 10:
+      textMonth = 'Oct';
+      break;
+    case 11:
+      textMonth = 'Nov';
+      break;
+    case 12:
+      textMonth = 'Dec';
+      break;
+  }
+
+  return textMonth;
+
+}
+
+
 function render(ipClient, data){
 
     var html        = '';
@@ -24,60 +73,20 @@ function render(ipClient, data){
         txtnickname = data[i].nickname+' Dice:';
       }
 
+      //Month text
+      var monthtext = getMonthText(data[i].month);
+
       //console.log(data[i].nickname);
       html+= '<div class="direct-chat-msg '+direct+'">';
         html+= '<div class="direct-chat-info clearfix">';
           html+= '<span class="direct-chat-name pull-'+direct+'">'+txtnickname+'</span>';
-          html+= '<span class="direct-chat-timestamp pull-'+directdate+'">'+data[i].date+' '+data[i].time+'</span>';
+          html+= '<span class="direct-chat-timestamp pull-'+directdate+'">'+data[i].day+' '+monthtext+' '+data[i].year+'  '+data[i].time+'</span>';
         html+= '</div>';
         html+= '<img class="direct-chat-img" src="img/user.jpg" alt="Message User Image">';
         html+= '<div class="direct-chat-text">'+data[i].text+'</div>';
       html+= '</div>';
 
     }
-
-    /*var html = data.map(function(message,index){
-
-      //console.log(message.nickname);
-        return (`
-            <div class="direct-chat-msg">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-left">${message.nickname} Dice:</span>
-                    <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
-                  </div>
-                  
-                  <img class="direct-chat-img" src="img/user.jpg" alt="Message User Image">
-                  <div class="direct-chat-text">${message.text}</div>
-                </div>
-
-            <div class="direct-chat-msg right">
-                  <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                    <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-                  </div>
-                  <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-                  <div class="direct-chat-text">
-                    You better believe it!
-                  </div>
-                </div>
-            `);
-    }).join(' ');
-
-    /*
-    
-<div class="message">
-                <div class="row">
-                    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
-                        <img src="http://www.subinet.es/wp-content/uploads/2010/03/batman-for-facebook.jpg" width="100" height="100"></img>
-                    </div>
-                    <div class="col-lg-10 col-md-9 col-sm-9 col-xs-9">
-                        <strong>${message.nickname} Dice:</strong>
-                        <p>${message.text}</p>
-                    </div>
-                </div>
-            </div>
-
-     */
 
     var div_msgs = document.getElementById('messages');
     div_msgs.innerHTML=html;
@@ -107,18 +116,20 @@ function addMessage(e){
   
   var date = new Date().toLocaleDateString();
   var time = new Date().toLocaleTimeString();
+  var d = new Date();
 
   var message = {
       //nickname: '4000',
       text: text,
       time: time,
       date: date,
-      raiting: 'true'
+      raiting: 'true',
+      year: d.getFullYear(),
+      month: d.getMonth()+1,
+      day: d.getDate()
   };
 
+  socket.emit('add-message',message);
 
-
-    socket.emit('add-message',message);
-
-    return false;
+  return false;
 }
