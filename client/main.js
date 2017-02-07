@@ -1,8 +1,7 @@
-var socket=io.connect('http://192.168.0.11:6677',{'forceNew':true});
+var socket=io.connect('http://192.168.20.167:6677',{'forceNew':true});
 
 socket.on('messages',function(data){
     //console.log(data);
-
     render(data);
 });
 
@@ -78,7 +77,7 @@ function render(data){
     var directdate  = 'right';
     var txtnickname = '';
     var imguser     = '';
-    var ipClient = document.getElementById('myip').value;
+    var ipClient    = '';
 
     for (var i = 0; i < data.length; i++) {
       //console.log(ipClient+'='+data[i].nicknames);
@@ -159,7 +158,7 @@ function addMessage(e){
 }
 
 
-function getUserIP(onNewIP) { //  onNewIp - your listener function for new IPs
+/*function getUserIP(onNewIP) { //  onNewIp - your listener function for new IPs
     //compatibility for firefox and chrome
     var myPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
     var pc = new myPeerConnection({
@@ -195,7 +194,7 @@ function getUserIP(onNewIP) { //  onNewIp - your listener function for new IPs
         if (!ice || !ice.candidate || !ice.candidate.candidate || !ice.candidate.candidate.match(ipRegex)) return;
         ice.candidate.candidate.match(ipRegex).forEach(iterateIP);
     };
-}
+}*/
 
 /*getUserIP(function(ip){
     alert("Got IP! :" + ip);
