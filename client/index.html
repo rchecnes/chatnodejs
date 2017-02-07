@@ -116,7 +116,12 @@
         }
     </style>
     <script type="text/javascript">
-        
+        getUserIP(function(ip){
+            //alert("Got IP! :" + ip);
+            $("#myIp").remove();
+            $("body").prepend("<input type='hidden' id='myIp' name='myIp' value='"+ip+"'>");
+
+        });
     </script>
 </head>
 <body>
@@ -145,7 +150,7 @@
               <form action="#" method="post" id="chat" onsubmit="return addMessage(this)">
                 <div class="input-group">
                     <input type="text" name="text" id="text" placeholder="Add your message and click in button send | ENTER" class="form-control">
-                    <input type="hidden" name="myip" id="myip">
+                    <!--<input type="hidden" name="myip" id="myip">-->
                     <span class="input-group-btn">
                         <button type="button"  id="viewemoticon" class="btn btn-primary btn-flat" >EMOTICONS</button>
                     </span>
@@ -200,13 +205,6 @@
             $("#text").val($("#text").val()+' '+param).focus();
             $("#cab_emoticon").toggle();
         });
-
-
-
-var ip = Request.UserHostAddress;
-var hostname = Request.UserHostName;
-
-console.log(ip);
 
       })
 

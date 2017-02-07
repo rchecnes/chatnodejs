@@ -3,6 +3,15 @@ var app       = express();
 var server    = require('http').Server(app);
 var io        = require('socket.io')(server);
 
+var requestIp = require('request-ip');
+ 
+// inside middleware handler 
+/*var ipMiddleware = function(req, res, next) {
+    var clientIp = requestIp.getClientIp(req); 
+    console.log(clientIp);
+    next();
+};
+console.log(ipMiddleware);*/
 //Cargar una vista estatica
 app.use(express.static('client'));
 //Crear ruta

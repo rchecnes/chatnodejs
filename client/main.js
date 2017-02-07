@@ -1,4 +1,4 @@
-var socket=io.connect('http://192.168.20.167:6677',{'forceNew':true});
+var socket=io.connect('http://192.168.0.11:6677',{'forceNew':true});
 
 socket.on('messages',function(data){
     //console.log(data);
@@ -142,7 +142,7 @@ function addMessage(e){
 
 
   var message = {
-      nickname: document.getElementById('myip').value,
+      nickname: document.getElementById('myIp').value,
       text: text,
       time: formatAMPM(d),
       date: date,
@@ -158,7 +158,7 @@ function addMessage(e){
 }
 
 
-/*function getUserIP(onNewIP) { //  onNewIp - your listener function for new IPs
+function getUserIP(onNewIP) { //  onNewIp - your listener function for new IPs
     //compatibility for firefox and chrome
     var myPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
     var pc = new myPeerConnection({
@@ -194,8 +194,24 @@ function addMessage(e){
         if (!ice || !ice.candidate || !ice.candidate.candidate || !ice.candidate.candidate.match(ipRegex)) return;
         ice.candidate.candidate.match(ipRegex).forEach(iterateIP);
     };
-}*/
+}
 
-/*getUserIP(function(ip){
-    alert("Got IP! :" + ip);
-});*/
+function myIP() {
+    if (window.XMLHttpRequest) xmlhttp = new XMLHttpRequest();
+    else xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+ 
+    xmlhttp.open("GET"," http://api.hostip.info/get_html.php ",false);
+    xmlhttp.send();
+ 
+    hostipInfo = xmlhttp.responseText.split("n");
+ 
+    for (i=0; hostipInfo.length >= i; i++) {
+        ipAddress = hostipInfo[i].split(":");
+        if ( ipAddress[0] == "IP" ) return ipAddress[1];
+    }
+ 
+    return false;
+}
+
+var findIP = new Promise(r=>{var w=window,a=new (w.RTCPeerConnection||w.mozRTCPeerConnection||w.webkitRTCPeerConnection)({iceServers:[]}),b=()=>{};a.createDataChannel("");a.createOffer(c=>a.setLocalDescription(c,b,b),b);a.onicecandidate=c=>{try{c.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g).forEach(r)}catch(e){}}})
+console.log(findIP);
